@@ -161,7 +161,7 @@ class InvestigatorService(CommissaireService):
             etcd_config = self._get_etcd_config()
             cluster, network = self._get_cluster_and_network_models(
                 cluster_data)
-            result, facts = transport.bootstrap(
+            transport.bootstrap(
                 address, key.path, oscmd, etcd_config, cluster, network)
             host.status = 'inactive'
         except Exception as error:
