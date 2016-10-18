@@ -13,6 +13,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from oslo_config import cfg
+import oslo_i18n as i18n
+from oslo_log import log as logging
+i18n.enable_lazy()
+logging.register_options(cfg.CONF)
+cfg.CONF(project='commissaire', prog='commissaire-service-storage',
+             version='dev')
+logging.setup(cfg.CONF, 'commissaire-service-storage')
+logging.set_defaults()
+
 import fnmatch
 import importlib
 import json
@@ -272,30 +282,30 @@ def main():  # pragma: no cover
     """
     Main entry point.
     """
-    import argparse
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '-c', '--config', type=str,
-        help='Configuration file to use.')
-    parser.add_argument(
-        '--bus-exchange', type=str, default='commissaire',
-        help='Message bus exchange name.')
-    parser.add_argument(
-        '--bus-uri', type=str, metavar='BUS_URI',
-        default='redis://127.0.0.1:6379/',  # FIXME: Remove before release
-        help=(
-            'Message bus connection URI. See:'
-            'http://kombu.readthedocs.io/en/latest/userguide/connections.html')
-    )
-
-    args = parser.parse_args()
+    # import argparse
+    #
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument(
+    #     '-c', '--config', type=str,
+    #     help='Configuration file to use.')
+    # parser.add_argument(
+    #     '--bus-exchange', type=str, default='commissaire',
+    #     help='Message bus exchange name.')
+    # parser.add_argument(
+    #     '--bus-uri', type=str, metavar='BUS_URI',
+    #     default='redis://127.0.0.1:6379/',  # FIXME: Remove before release
+    #     help=(
+    #         'Message bus connection URI. See:'
+    #         'http://kombu.readthedocs.io/en/latest/userguide/connections.html')
+    # )
+    #
+    # args = parser.parse_args()
 
     try:
         service = StorageService(
-            exchange_name=args.bus_exchange,
-            connection_url=args.bus_uri,
-            config_file=args.config)
+            exchange_name='commissaire',
+            connection_url='redis://127.0.0.1:6379/',
+            config_file='/etc/commissaire/storage.conf')
         service.run()
     except KeyboardInterrupt:
         pass
