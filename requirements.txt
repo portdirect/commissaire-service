@@ -1,6 +1,6 @@
 kombu
-python-etcd>=0.4.3
+git+git://github.com/jplana/python-etcd.git#egg=python-etcd
 requests
 sphinx_rtd_theme
-git+https://github.com/projectatomic/commissaire.git
+git+https://github.com/portdirect/commissaire.git
 redis
