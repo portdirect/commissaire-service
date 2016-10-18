@@ -66,10 +66,5 @@ setup(
             ('commissaire-investigator-service = '
              'commissaire_service.investigator:main'),
         ],
-    },
-    dependency_links=[
-        "git+https://github.com/jplana/python-etcd.git@0d0145f5e835aa032c97a0a5e09c4c68b7a03f66#egg=python-etcd-0.4.3"
-    ]
-
-
+    }
 )
