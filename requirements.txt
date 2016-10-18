@@ -4,3 +4,5 @@ requests
 sphinx_rtd_theme
 git+https://github.com/portdirect/commissaire.git
 redis
+oslo.config
+oslo.log
