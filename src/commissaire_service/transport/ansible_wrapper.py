@@ -16,8 +16,10 @@
 # This is Steve Milner's programmatic Ansible hack (the good kind) from:
 # https://stevemilner.org/2016/07/30/programmatic-ansible-middle-ground/
 
+from oslo_config import cfg
+from oslo_log import log as logging
+
 import json
-import logging
 import os  # Used for expanding paths
 import subprocess
 
@@ -26,9 +28,6 @@ from ansible.errors import AnsibleParserError
 # Set up our logging
 logger = logging.getLogger('transport')
 logger.setLevel(logging.INFO)
-handler = logging.StreamHandler()
-handler.formatter = logging.Formatter('%(name)s - %(message)s')
-logger.addHandler(handler)
 
 
 def get_inventory_file(hosts):
